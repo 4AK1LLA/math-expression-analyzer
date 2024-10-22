@@ -5,7 +5,22 @@ document.getElementById('form').addEventListener('submit', (event) => {
     exec(expression);
 });
 
+let successMessage = '<i class="bi bi-check"></i>Введений вираз не містить помилок';
+let errorsMessage = '<i class="bi bi-x"></i>Введений вираз містить помилки: %e шт.';
+let blockSuccess = document.getElementById('blockSuccess');
+let blockErrors = document.getElementById('blockErrors');
+blockSuccess.setAttribute('hidden', '');
+blockErrors.setAttribute('hidden', '');
+let labelSuccess = document.getElementById('labelSuccess');
+labelSuccess.innerHTML = successMessage;
+let labelErrors = document.getElementById('labelErrors');
+let listErrors = document.getElementById('listErrors');
+
 function exec(expression) {
+
+    blockSuccess.setAttribute('hidden', '');
+    blockErrors.setAttribute('hidden', '');
+    listErrors.innerHTML = '';
 
     let tokens = [];
     let currentToken = null;
@@ -127,7 +142,7 @@ function exec(expression) {
             errorMessages.push(`Позиція ${token.startPos}: Змінна не може починатися з цифри.`);
         }
 
-        let numberIsInvalid = token.type == 'number' && (token.value.match(/\./) || []).length > 1;
+        let numberIsInvalid = token.type == 'number' && (token.value.match(/\./g) || []).length > 1;
         if (numberIsInvalid) {
             errorMessages.push(`Позиція ${token.startPos}: Зайві символи '.' в числі.`);
         }
@@ -182,5 +197,21 @@ function exec(expression) {
         }
     }
 
-    console.log(errorMessages);
+    if (tokens.length == 0) {
+        errorMessages.push(`Позиція 0: Вираз не задано.`);
+    }
+
+    if (errorMessages.length == 0) {
+        blockSuccess.removeAttribute('hidden');
+    } else {
+        labelErrors.innerHTML = errorsMessage.replace('%e', errorMessages.length);
+
+        for (let i = 0; i < errorMessages.length; i++) {
+            let li = document.createElement("li");
+            li.innerHTML = errorMessages[i];
+            listErrors.appendChild(li);
+        }
+
+        blockErrors.removeAttribute('hidden');
+    }
 }
