@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна №1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="display-6 mt-3">Аналізатор арифметичного виразу</h1>
+
+        <!-- Form -->
+        <form id="form" class="d-flex align-items-center mt-3">
+            <!-- Expression input -->
+            <div class="form-floating w-50">
+                <input class="form-control" id="expressionInput" placeholder="">
+                <label for="expressionInput">Введіть вираз</label>
+            </div>
+
+            <!-- Exec button -->
+            <div class="ms-3">
+                <button type="submit" class="btn btn-primary">Перевірити</button>
+            </div>
+        </form>
+
+        <!-- Result block success -->
+        <div class="mt-3">
+            <p class="lead text-success"><i class="bi bi-check"></i>Введений вираз не містить помилок</p>
+        </div>
+
+        <!-- Result block errors -->
+        <div class="mt-3">
+            <p class="lead text-danger"><i class="bi bi-x"></i>Введений вираз містить помилки: 3 шт.</p>
+
+            <code class="text-muted">
+                <ul>
+                    <li>Позиція 3: зайва кома</li>
+                    <li>Позиція 5: неправильний формат змінної</li>
+                    <li>Позиція 10: непрафильний формат числа</li>
+                </ul>
+                <p>Можливе виправлення <b>32+1.5-pi-2*cos(x-3y)+21*2</b></p>
+            </code>
+        </div>
+
+        <!-- Footer -->
+        <footer class="py-3 border-top mt-5">
+            <p class="mb-0 text-body-secondary">© 2024 Третьяков Руслан ІМ-42мп</p>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
